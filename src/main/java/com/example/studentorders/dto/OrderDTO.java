@@ -1,4 +1,4 @@
-﻿package com.example.studentorders.dto;
+package com.example.studentorders.dto;
 
 import java.math.BigDecimal;
 

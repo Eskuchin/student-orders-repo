@@ -1,4 +1,4 @@
-﻿package com.example.studentorders.dto;
+package com.example.studentorders.dto;
 
 import lombok.Setter;
 
@@ -6,6 +6,7 @@ import java.util.List;
 
 public class StudentDTO {
 
+    @Setter
     @lombok.Getter
     private Long id;
     @lombok.Getter
@@ -25,10 +26,6 @@ public class StudentDTO {
     @lombok.Getter
     @Setter
     private List<OrderDTO> orders;
-
-    public Long setId(Long id) {
-        return id;
-    }
 
 
 }

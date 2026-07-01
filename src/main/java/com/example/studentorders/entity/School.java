@@ -24,8 +24,6 @@ public class School {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String address;
-
     @OneToMany(mappedBy = "school")
     private List<Student> students = new ArrayList<>();
 }
