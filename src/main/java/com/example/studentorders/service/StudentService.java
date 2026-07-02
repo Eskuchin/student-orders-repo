@@ -1,6 +1,5 @@
 package com.example.studentorders.service;
 
-import com.example.studentorders.dto.CreateStudentDTO;
 import com.example.studentorders.dto.StudentRequest;
 import com.example.studentorders.dto.StudentResponse;
 import com.example.studentorders.entity.School;
