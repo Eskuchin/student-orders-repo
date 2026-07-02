@@ -1,8 +1,11 @@
 package com.example.studentorders.service;
 
 import com.example.studentorders.dto.CreateStudentDTO;
+import com.example.studentorders.dto.StudentRequest;
+import com.example.studentorders.dto.StudentResponse;
 import com.example.studentorders.entity.School;
 import com.example.studentorders.entity.Student;
+import com.example.studentorders.mapper.StudentMapper;
 import com.example.studentorders.repository.SchoolRepository;
 import com.example.studentorders.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -20,26 +23,47 @@ public class StudentService {
         this.schoolRepository = schoolRepository;
     }
 
-    public Student createStudent(CreateStudentDTO dto) {
+    public List<StudentResponse> getAllStudents() {
+        List<StudentResponse> studentResponse = studentRepository.findAll().stream()
+                .map(StudentMapper::toResponse)
+                .toList();
+        return studentResponse;
+    }
 
-        School school = schoolRepository.findById(dto.getSchoolId())
+    public StudentResponse getStudent(Long id) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        return StudentMapper.toResponse(student);
+    }
+
+    public StudentResponse createStudent(StudentRequest request) {
+
+        School school = schoolRepository.findById(request.getSchoolId())
                 .orElseThrow(() -> new RuntimeException("School not found"));
 
-        Student student = new Student();
-        student.setFirstName(dto.getFirstName());
-        student.setLastName(dto.getLastName());
-        student.setGrade(dto.getGrade());
+        Student student = StudentMapper.toEntity(request, school);
+
+        Student saved = studentRepository.save(student);
+
+        return StudentMapper.toResponse(saved);
+    }
+
+    public StudentResponse updateStudent(Long id, StudentRequest request) {
+
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        School school = schoolRepository.findById(request.getSchoolId())
+                .orElseThrow(() -> new RuntimeException("School not found"));
+
+        student.setFirstName(request.getFirstName());
+        student.setLastName(request.getLastName());
+        student.setGrade(request.getGrade());
         student.setSchool(school);
 
-        return studentRepository.save(student);
-    }
+        Student updated = studentRepository.save(student);
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
-
-    public Student getStudent(Long id) {
-        return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+        return StudentMapper.toResponse(updated);
     }
 }
