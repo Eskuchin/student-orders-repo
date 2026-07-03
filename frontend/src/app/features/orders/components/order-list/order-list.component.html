@@ -1,0 +1,33 @@
+<div class="container mt-4">
+
+  <h2>Orders</h2>
+  <div>
+    <button class="btn btn-secondary me-2"
+          (click)="goBack()">
+    ← Back
+    </button>
+    <button class="btn btn-primary" (click)="goToCreate()">
+      Create Order
+    </button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Total</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    @for (order of orders(); track order.id) {
+    <tr>
+      <td>{{ order.description }}</td>
+      <td>{{ order.total }}</td>
+      <td>{{ order.status }}</td>
+    </tr>
+    }
+    </tbody>
+  </table>
+
+</div>

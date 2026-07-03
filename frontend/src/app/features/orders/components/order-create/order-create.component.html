@@ -1,0 +1,44 @@
+<div class="container mt-4">
+
+  <h2>Create Order</h2>
+  <button class="btn btn-secondary mb-3"
+          (click)="goBack()">
+    ← Back
+  </button>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label>Description</label>
+      <input class="form-control"
+             [(ngModel)]="order.description"
+             name="description">
+    </div>
+
+    <div class="mb-3">
+      <label>Total</label>
+      <input type="number"
+             class="form-control"
+             [(ngModel)]="order.total"
+             name="total">
+    </div>
+
+    <div class="mb-3">
+      <label>Order Status</label>
+      <select class="form-control"
+              [(ngModel)]="order.status"
+              name="status">
+
+        @for (s of statuses; track s) {
+        <option [value]="s">{{ s }}</option>
+        }
+
+      </select>
+    </div>
+
+    <button class="btn btn-success" type="submit">
+      Create Order
+    </button>
+
+  </form>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="container mt-4">
+
+  <h2>Create Student</h2>
+
+  <button class="btn btn-secondary mb-3"
+          (click)="goBack()">
+    ← Back
+  </button>
+
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label>First Name</label>
+      <input class="form-control"
+             [(ngModel)]="student.firstName"
+             name="firstName">
+    </div>
+
+    <div class="mb-3">
+      <label>Last Name</label>
+      <input class="form-control"
+             [(ngModel)]="student.lastName"
+             name="lastName">
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="student.email"
+        name="email">
+    </div>
+
+    <div class="mb-3">
+      <label>Grade</label>
+      <input type="number"
+             class="form-control"
+             [(ngModel)]="student.grade"
+             name="grade">
+    </div>
+
+    <div class="mb-3">
+      <label>School</label>
+      <select class="form-control"
+              [(ngModel)]="student.schoolId"
+              name="schoolId">
+
+        <option value="0" disabled>Select a school</option>
+
+        @for (school of schools; track school.id) {
+        <option [value]="school.id">
+          {{ school.name }}
+        </option>
+        }
+
+      </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">
+      Create Student
+    </button>
+
+  </form>
+
+</div>
