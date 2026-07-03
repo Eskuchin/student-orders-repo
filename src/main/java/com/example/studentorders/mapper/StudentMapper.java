@@ -16,6 +16,7 @@ public class StudentMapper {
         student.setLastName(request.getLastName());
         student.setGrade(request.getGrade());
         student.setSchool(school);
+        student.setEmail(request.getEmail());
 
         return student;
     }
@@ -27,6 +28,7 @@ public class StudentMapper {
         response.setFirstName(student.getFirstName());
         response.setLastName(student.getLastName());
         response.setGrade(student.getGrade());
+        response.setEmail(student.getEmail());
 
         if (student.getSchool() != null) {
             response.setSchoolName(student.getSchool().getName());

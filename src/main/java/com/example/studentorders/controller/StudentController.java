@@ -1,8 +1,10 @@
 package com.example.studentorders.controller;
 
+import com.example.studentorders.dto.SchoolResponse;
 import com.example.studentorders.dto.StudentRequest;
 import com.example.studentorders.dto.StudentResponse;
 import com.example.studentorders.mapper.StudentMapper;
+import com.example.studentorders.service.SchoolService;
 import com.example.studentorders.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/students")
-@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
     private final StudentService studentService;

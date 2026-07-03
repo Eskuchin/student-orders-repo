@@ -15,5 +15,8 @@ public class StudentRequest {
     @lombok.Setter
     @lombok.Getter
     private Long schoolId;
+    @lombok.Setter
+    @lombok.Getter
+    private String email;
 
 }

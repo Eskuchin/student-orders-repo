@@ -60,6 +60,7 @@ public class StudentService {
         student.setLastName(request.getLastName());
         student.setGrade(request.getGrade());
         student.setSchool(school);
+        student.setEmail(request.getEmail());
 
         Student updated = studentRepository.save(student);
 

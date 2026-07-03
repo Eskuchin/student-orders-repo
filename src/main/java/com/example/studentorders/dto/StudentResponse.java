@@ -19,4 +19,7 @@ public class StudentResponse {
     @Getter
     @Setter
     private String schoolName;
+    @Getter
+    @Setter
+    private String email;
 }
