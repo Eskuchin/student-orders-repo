@@ -5,37 +5,98 @@
           (click)="goBack()">
     ← Back
   </button>
-  <form (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+
+    <!-- Description -->
 
     <div class="mb-3">
-      <label>Description</label>
-      <input class="form-control"
-             [(ngModel)]="order.description"
-             name="description">
+
+      <label class="form-label">
+        Description
+      </label>
+
+      <input
+        class="form-control"
+        formControlName="description">
+
+      @if (description?.touched && description?.hasError('required')) {
+
+      <div class="text-danger">
+        Description is required.
+      </div>
+
+      }
+
     </div>
 
+    <!-- Total -->
+
     <div class="mb-3">
-      <label>Total</label>
-      <input type="number"
-             class="form-control"
-             [(ngModel)]="order.total"
-             name="total">
+
+      <label class="form-label">
+        Total
+      </label>
+
+      <input
+        type="number"
+        class="form-control"
+        formControlName="total"
+        step="0.01"
+        min="0.01">
+
+      @if (total?.touched && total?.hasError('required')) {
+
+      <div class="text-danger">
+        Total is required.
+      </div>
+
+      }
+
+      @if (total?.touched && total?.hasError('min')) {
+
+      <div class="text-danger">
+        Total must be greater than zero.
+      </div>
+
+      }
+
+      @if (total?.touched && total?.hasError('pattern')) {
+
+      <div class="text-danger">
+        Total can contain at most two decimal places.
+      </div>
+
+      }
+
     </div>
 
-    <div class="mb-3">
-      <label>Order Status</label>
-      <select class="form-control"
-              [(ngModel)]="order.status"
-              name="status">
+    <!-- Status -->
 
-        @for (s of statuses; track s) {
-        <option [value]="s">{{ s }}</option>
+    <div class="mb-4">
+
+      <label class="form-label">
+        Status
+      </label>
+
+      <select
+        class="form-select"
+        formControlName="status">
+
+        @for (status of statuses; track status) {
+
+        <option [value]="status">
+          {{ status }}
+        </option>
+
         }
 
       </select>
+
     </div>
 
-    <button class="btn btn-success" type="submit">
+    <button class="btn btn-success" type="submit" [disabled]="form.invalid">
       Create Order
     </button>
 

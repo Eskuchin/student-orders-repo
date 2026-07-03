@@ -7,57 +7,117 @@
     ← Back
   </button>
 
-  <form (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+
+    <!-- First Name -->
 
     <div class="mb-3">
-      <label>First Name</label>
-      <input class="form-control"
-             [(ngModel)]="student.firstName"
-             name="firstName">
+      <label class="form-label">First Name</label>
+
+      <input
+        class="form-control"
+        formControlName="firstName">
+
+      @if (firstName?.touched && firstName?.hasError('required')) {
+      <div class="text-danger">
+        First name is required.
+      </div>
+      }
     </div>
 
-    <div class="mb-3">
-      <label>Last Name</label>
-      <input class="form-control"
-             [(ngModel)]="student.lastName"
-             name="lastName">
-    </div>
+    <!-- Last Name -->
 
     <div class="mb-3">
-      <label>Email</label>
+      <label class="form-label">Last Name</label>
+
+      <input
+        class="form-control"
+        formControlName="lastName">
+
+      @if (lastName?.touched && lastName?.hasError('required')) {
+      <div class="text-danger">
+        Last name is required.
+      </div>
+      }
+    </div>
+
+    <!-- Email -->
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+
       <input
         type="email"
         class="form-control"
-        [(ngModel)]="student.email"
-        name="email">
+        formControlName="email">
+
+      @if (email?.touched && email?.hasError('required')) {
+      <div class="text-danger">
+        Email is required.
+      </div>
+      }
+
+      @if (email?.touched && email?.hasError('email')) {
+      <div class="text-danger">
+        Please enter a valid email address.
+      </div>
+      }
     </div>
 
+    <!-- Grade -->
+
     <div class="mb-3">
-      <label>Grade</label>
-      <input type="number"
-             class="form-control"
-             [(ngModel)]="student.grade"
-             name="grade">
+      <label class="form-label">Grade</label>
+
+      <input
+        type="number"
+        class="form-control"
+        formControlName="grade">
+
+      @if (grade?.touched && grade?.hasError('min')) {
+      <div class="text-danger">
+        Grade must be at least 1.
+      </div>
+      }
+
+      @if (grade?.touched && grade?.hasError('max')) {
+      <div class="text-danger">
+        Grade cannot exceed 10.
+      </div>
+      }
     </div>
 
-    <div class="mb-3">
-      <label>School</label>
-      <select class="form-control"
-              [(ngModel)]="student.schoolId"
-              name="schoolId">
+    <!-- School -->
 
-        <option value="0" disabled>Select a school</option>
+    <div class="mb-4">
+      <label class="form-label">School</label>
+
+      <select
+        class="form-select"
+        formControlName="schoolId">
+
+        <option [ngValue]="null">
+          Select a school...
+        </option>
 
         @for (school of schools; track school.id) {
-        <option [value]="school.id">
+        <option [ngValue]="school.id">
           {{ school.name }}
         </option>
         }
 
       </select>
+
+      @if (schoolId?.touched && schoolId?.hasError('required')) {
+      <div class="text-danger">
+        Please select a school.
+      </div>
+      }
     </div>
 
-    <button class="btn btn-primary" type="submit">
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
       Create Student
     </button>
 

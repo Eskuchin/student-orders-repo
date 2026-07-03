@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { StudentService } from '../../services/student.service';
 import { StudentResponse } from '../../models/student-response';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
-import { signal } from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
@@ -14,16 +13,34 @@ import {Router} from '@angular/router';
   styleUrl: './student-list.css',
 })
 export class StudentListComponent implements OnInit {
+
   students = signal<StudentResponse[]>([]);
-  constructor(private studentService: StudentService,
-              private router: Router) {
-  }
+  loading = signal(true);
+
+  constructor(
+    private studentService: StudentService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.loadStudents();
+  }
+
+  loadStudents(): void {
+
+    this.loading.set(true);
+
     this.studentService.getStudents().subscribe({
-      next: students => this.students.set(students),
-      error: err => console.error(err)
+      next: students => {
+        this.students.set(students);
+        this.loading.set(false);
+      },
+      error: err => {
+        console.error(err);
+        this.loading.set(false);
+      }
     });
+
   }
 
   viewOrders(studentId: number): void {
@@ -33,4 +50,5 @@ export class StudentListComponent implements OnInit {
   goToCreateStudent(): void {
     this.router.navigate(['/students/new']);
   }
+
 }
