@@ -2,10 +2,9 @@ package com.example.studentorders.mapper;
 
 import com.example.studentorders.dto.*;
 import com.example.studentorders.entity.Order;
+import com.example.studentorders.entity.OrderStatus;
 import com.example.studentorders.entity.School;
 import com.example.studentorders.entity.Student;
-
-import java.util.stream.Collectors;
 
 public class StudentMapper {
 
@@ -42,7 +41,7 @@ public class StudentMapper {
 
         order.setDescription(orderRequest.getDescription());
         order.setTotal(orderRequest.getTotal());
-        order.setStatus(orderRequest.getOrderStatus());
+        order.setStatus(OrderStatus.valueOf(orderRequest.getStatus()));
 
         return order;
     }

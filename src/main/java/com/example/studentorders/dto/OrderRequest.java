@@ -1,7 +1,5 @@
 package com.example.studentorders.dto;
 
-import com.example.studentorders.entity.OrderStatus;
-import com.example.studentorders.entity.Student;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +14,5 @@ public class OrderRequest {
     private BigDecimal total;
     @Getter
     @Setter
-    private OrderStatus orderStatus;
+    private String status;
 }
