@@ -1,6 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { StudentService } from './services/student.service';
 
 
 @Component({
@@ -9,16 +8,9 @@ import { StudentService } from './services/student.service';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit {
 
+
+
+export class App {
   protected readonly title = signal('frontend');
-
-  constructor(private studentService: StudentService) {}
-
-  ngOnInit(): void {
-    this.studentService.getStudents().subscribe({
-      next: students => console.log(students),
-      error: err => console.error(err)
-    });
-  }
 }

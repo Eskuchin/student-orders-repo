@@ -4,4 +4,5 @@
   lastName: string;
   grade: number;
   schoolName: string;
+  email: string;
 }
