@@ -4,6 +4,6 @@ First make sure Docker is running on your machine. Just start running the Studen
 
 For the backend, I used a typical MVC architecture to neatly separate concerns. A repository layer to manage access to the data, a DTO layer to safely transform objects between domain entities and API responses. I use JPA Hibernate entities to act as the source of truth, in order to automatically create the schema. I use Lombok to cut down on boilerplate and make it even simpler to extend, and build upon. 
 
-For the front end, I used Angular with Bootstrap CSS styling. Bootstrap is extremely common, so the layout of the site should feel familiar. I organized the folder structure by feature, to make it easy to find particular features and simplify extension. 
+For the front end, I used Angular with Bootstrap CSS styling. Bootstrap is extremely common, so the layout of the site should feel familiar. I organized the folder structure by feature, to make it easy to find particular features and simplify extension. Both front and back end have some input validation.
 
-There's certainly room for improvement, such as deleting or archiving students and orders, adding schools, and so forth. I included basic validation, on both the back end and front end, but there is always room for improvement. 
+There's certainly room for improvement, such as deleting or archiving students and orders, adding schools, and so forth. 
