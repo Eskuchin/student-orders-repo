@@ -1,2 +1,2 @@
 # student-orders-repo
-The Student Orders full stack interview project.
+The Student Orders full stack showcase project.
